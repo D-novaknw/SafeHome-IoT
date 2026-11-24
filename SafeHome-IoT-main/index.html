@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SafeHome | Proteccion sismica para tu hogar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Logotipo reutilizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#8a8a8a"/>
+      </linearGradient>
+    </defs>
+    <symbol id="logo" viewBox="0 0 64 64">
+      <path d="M32 5 59 28v29H5V28Z" fill="none" stroke="url(#gl)" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M13 42h9l5-11 8 18 6-10 3 3h7" fill="none" stroke="url(#gl)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <header class="topbar">
+    <nav class="nav" aria-label="Secciones">
+      <button class="nav-btn active" data-page="inicio">Inicio</button>
+      <button class="nav-btn" data-page="elementos">Elementos</button>
+      <button class="nav-btn" data-page="lenguaje">Lenguaje y codigo</button>
+      <button class="nav-btn" data-page="sfh">SFH</button>
+    </nav>
+    <div class="brand">
+      <svg class="logo" width="34" height="34"><use href="#logo"/></svg>
+      <span>SafeHome</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INICIO -->
+    <section class="page active" id="inicio">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Cuando la tierra se mueve, tu casa se protege sola.</h1>
+          <p class="lead">SafeHome detecta sismos fuertes con un sensor de movimiento y corta al instante la electricidad y el gas, para evitar incendios y fugas.</p>
+          <div class="actions">
+            <button class="btn ghost" data-page="elementos">Ver elementos</button>
+          </div>
+        </div>
+        <figure class="hero-img">
+          <!-- CAMBIA AQUÍ LA IMAGEN: guarda tu foto en la misma carpeta y cambia el nombre en src (alt = descripción de la imagen) -->
+          <img src="BUTTON.png" alt="Boton">
+        </figure>
+      </div>
+
+      <div class="duo">
+        <article class="duo-card problema">
+          <h2>Problemática.</h2>
+          <p>Durante un sismo, las instalaciones de gas, electricidad y agua pueden sufrir daños, provocando fugas, incendios, explosiones e inundaciones. Actualmente, la mayoría de las viviendas dependen de que una persona cierre manualmente los suministros, algo que puede resultar difícil o imposible durante una emergencia.</p>
+        </article>
+        <article class="duo-card objetivo">
+          <h2>Nuestro Objetivo.</h2>
+          <p>Desarrollar un sistema de protección sísmica basado en IoT que detecte movimientos sísmicos y alertas tempranas para cortar automáticamente los suministros de gas, electricidad y agua, además de notificar al usuario y permitir el monitoreo y control remoto desde su celular.</p>
+        </article>
+      </div>
+
+      <div class="steps">
+        <article><span class="num">1</span><h3>Detecta</h3><p>El sensor mide las vibraciones del suelo todo el tiempo.</p></article>
+        <article><span class="num">2</span><h3>Decide</h3><p>Si la sacudida supera el límite, el sistema confirma que es un sismo fuerte.</p></article>
+        <article><span class="num">3</span><h3>Protege</h3><p>Corta la electricidad y el gas, y activa una alarma sonora.</p></article>
+      </div>
+
+      <!-- ENLACE: cambia el texto y reemplaza https://example.com por tu link -->
+      <div class="enlace">
+        <div>
+          <h2>Kahoot!</h2>
+          <p>Un pequeño quiz para probar tus conocimientos sobre nuestro proyecto.</p>
+        </div>
+        <a class="btn primary" href="https://kahoot.it/solo/6edda8b7-5d88-4934-8c41-8a5fe9ff4baa_1795135879336" target="_blank" rel="noopener noreferrer">Abrir enlace</a>
+      </div>
+    </section>
+
+    <!-- ELEMENTOS -->
+    <section class="page" id="elementos">
+      <h2>Elementos del proyecto</h2>
+      <p class="lead">Estas son las piezas que trabajan juntas para proteger el hogar.</p>
+      <div class="grid">
+        <a class="item" href="#el-sensor" data-page="el-sensor"><div class="ico">📡</div><h3>Sensor de Movimiento</h3><p>MPU6050</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-micro" data-page="el-micro"><div class="ico">🧠</div><h3>Microcontrolador</h3><p>ESP32: lee el sensor y decide cuándo actuar.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-rele" data-page="el-rele"><div class="ico">🔌</div><h3>Relé de electricidad</h3><p>Interruptor electrónico que corta el paso de corriente de la casa.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-gas" data-page="el-gas"><div class="ico">🔥</div><h3>Electroválvula de gas</h3><p>Cierra el conducto del gas para evitar fugas y explosiones.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-alarma" data-page="el-alarma"><div class="ico">🔔</div><h3>Alarma y LED</h3><p>Avisan a las personas que el sistema detectó un sismo.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-bateria" data-page="el-bateria"><div class="ico">🔊</div><h3>Buzzer</h3><p>Mantiene el sistema con sonido en caso de sismo, suene</p><span class="mas">Ver detalles</span></a>
+      </div>
+
+      <h2 class="tech-title">Tecnología del proyecto</h2>
+      <p class="lead">Qué hardware elegimos, cómo se conecta el sistema y cómo viajan los datos.</p>
+      <div class="grid">
+        <a class="item" href="#el-hardware" data-page="el-hardware"><div class="ico">🛠️</div><h3>Hardware elegido</h3><p>Punto 4 · ESP32, MPU6050, servomotores, LED y buzzer.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-conectividad" data-page="el-conectividad"><div class="ico">📶</div><h3>Tipo de conectividad</h3><p>Punto 5 · Wi-Fi, HTTP, backend, MySQL e interfaz web.</p><span class="mas">Ver detalles</span></a>
+        <a class="item" href="#el-protocolo" data-page="el-protocolo"><div class="ico">📨</div><h3>Protocolo de comunicación</h3><p>Punto 6 · HTTP con rutas POST y GET.</p><span class="mas">Ver detalles</span></a>
+      </div>
+    </section>
+
+    <!-- DETALLE: Sensor de movimiento -->
+    <section class="page detalle" id="el-sensor">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">📡</div><h2>Sensor de movimiento</h2></div>
+      <p class="lead">MPU6050. Mide las vibraciones del suelo para detectar un sismo.</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>Se colocará en una superficie fija y establepreferentemente en una parte central de la vivienda. Para protegerlo senecesita una CARCASA PROTECTORA, es una cubierta pequeña queprotege el sensor del polvo, humedad y los golpes, ya que necesitadetectar los movimientos de la estructura.</p></article>
+        <article><h3>En SafeHome</h3><p>Envía sus lecturas al microcontrolador. Si la sacudida supera el umbral, se activa el corte de luz y gas.</p></article>
+        <img src="MPU6050-GY-521-Sensor-Module-02.png" alt="SENSOR">
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        </div>
+    </section>
+
+    <!-- DETALLE: Microcontrolador -->
+    <section class="page detalle" id="el-micro">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🧠</div><h2>Microcontrolador</h2></div>
+      <p class="lead">Es el cerebro del sistema.</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>Se colocará en el interior de la casa, para protegerlo se ocuparáuna CAJA ESTANCA IP65 sirve para evitar que entre polvo o humedad yelementos del exterior. El ESP32 no necesita recibir luz solar directa yestará cerca de una fuente de alimentación USB.</p></article>
+        <article><h3>En SafeHome</h3><p>Controla el relé, la electroválvula y la alarma con el código en C++ de la sección Lenguaje y código.</p></article>
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        <img src="ESP32-DevKit-V1-Pinout-Diagram.png" alt="ESP32">  
+      </div>
+    </section>
+
+    <!-- DETALLE: Relé de electricidad -->
+    <section class="page detalle" id="el-rele">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🔌</div><h2>Relé de electricidad</h2></div>
+      <p class="lead">Un interruptor que se activa con una señal pequeña.</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>Se utilizará una pastilla eléctrica junto con una palanca. Elservomotor estará conectado a la palanca para que, cuando se active laalerta esta baje y se corte la electricidad. Debe de estar fijo, cerrado yseparado de las partes móviles del servomotor, estará en una parteinferior exterior pero elevado del suelo. Para protegerla vamos a ocuparun GABINETE ELÉCTRICO ESTANCO IP65, sirve para proteger la pastilla ysus conexiones contra el agua, la humedad y el polvo, también paraproteger los componentes eléctricos de las condiciones del exterior.</p></article>
+        <article><h3>En SafeHome</h3><p>Corta el paso de electricidad cuando se detecta el sismo. Importante: la corriente de una casa es peligrosa; para la maqueta usa bajo voltaje y pide ayuda a un adulto.</p></article>
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        <img src="Pastilla.jpe" alt="ELECTRICITY">  
+      </div>
+    </section>
+
+    <!-- DETALLE: Electroválvula de gas -->
+    <section class="page detalle" id="el-gas">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🔥</div><h2>Electroválvula de gas</h2></div>
+      <p class="lead">Una válvula que se abre o se cierra con electricidad.</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>Estará conectado directamente a la llave del gas, cuandose active la alerta el servomotor moverá la llave para que directamentecierre el gas. Para proteger la parte eléctrica se va a necesitar unaCUBIERTA PROTECTORA IMPERMEABLE lo va a proteger de salpicaduras,polvo y humedad.</p></article>
+        <article><h3>En SafeHome</h3><p>Se cierra al detectar el sismo para evitar fugas. En una instalación real de gas, el trabajo debe hacerlo un técnico certificado.</p></article>
+        <article class="full"><h3>Válvula motorizada</h3><p>Coloca en el interior de la casa cerca de la zona de cocina, se conecta al sistema de control y permite cerrar el paso del gas cuando se detecta una posible fuga. Para protegerlo se ocupará un CUBIERTA PROTECTORA VENTILADA sirve para proteger el sensor del polvo y salpicaduras sin bloquear la entrada de aire que necesita para detectar gases.</p></article>
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        <img src="SERVOMOTOR.jpe" alt="GAS">    
+      </div>
+    </section>
+
+    <!-- DETALLE: Alarma y LED -->
+    <section class="page detalle" id="el-alarma">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🔔</div><h2>Alarma y LED</h2></div>
+      <p class="lead">Avisan con sonido y luz que el sistema se activó.</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>El buzzer produce un sonido fuerte y el LED enciende una luz de alerta.</p></article>
+        <article><h3>En SafeHome</h3><p>Se activan al detectar el sismo, para que todos sepan que la luz y el gas ya fueron cortados.</p></article>
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        <img src="Led-10mm-Grande-V1.jpg" alt="LEDS">  
+      </div>
+    </section>
+
+    <!-- DETALLE: Buzzer -->
+    <section class="page detalle" id="el-bateria">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🔊</div><h2>Batería de respaldo</h2></div>
+      <p class="lead">Da el sonido al sistema en caso de sismo</p>
+      <div class="det-body">
+        <article><h3>¿Qué hace?</h3><p>Almacena energía para alimentar los componentes cuando no hay corriente de la red. El BUZZER se ocupara una CUBIERTA ACÚSTICA IMPERMEABLE esto lo protegera del agua y del polvosin impedir que se escuche la alarma.</p></article>
+        <article><h3>En SafeHome</h3><p>Como SafeHome corta la electricidad de la casa, la batería permite que el sensor, el microcontrolador y la alarma sigan funcionando.</p></article>
+      </div>
+      <div class="extra">
+        <!-- AGREGA AQUÍ MÁS INFORMACIÓN: fotos, diagramas, precio, conexiones, pruebas... -->
+        <img src="12v-piezo-electric-buzzer-alarm5-550x550.jpeg" alt="BUZZER">  
+      </div>
+    </section>
+
+    <!-- DETALLE: Hardware elegido (punto 4) -->
+    <section class="page detalle" id="el-hardware">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">🛠️</div><h2>Hardware elegido</h2></div>
+      <p class="lead">Punto 4. Los componentes que detectan el sismo, deciden y protegen la casa.</p>
+      <div class="det-body">
+        <article class="full"><h3>Componentes</h3>
+          <ul class="lista">
+            <li><b>ESP32:</b> microcontrolador con Wi-Fi y Bluetooth integrados. Es económico y suficiente para leer el sensor y controlar las salidas.</li>
+            <li><b>MPU6050:</b> sensor de movimiento (acelerómetro y giroscopio) que detecta la sacudida del sismo.</li>
+            <li><b>2 servomotores:</b> uno mueve la llave del gas y el otro baja la palanca de la pastilla eléctrica.</li>
+            <li><b>LED y buzzer:</b> avisan con luz y sonido que hay una alerta.</li>
+            <li><b>Protecciones:</b> caja estanca IP65, carcasa para el sensor y cubiertas impermeables.</li>
+          </ul>
+        </article>
+        <article><h3>¿Por qué este hardware?</h3><p>El ESP32 ya trae Wi-Fi, así que no hace falta un módulo extra. El MPU6050 mide aceleración y giro en un solo chip y se conecta por I2C con solo dos cables. Los servomotores permiten cerrar la llave y bajar la palanca sin modificar la instalación original de la casa.</p></article>
+        <article><h3>Sobre la protección IP65</h3><p>En IP65, el 6 significa que no entra polvo y el 5 que resiste chorros de agua. Por eso la caja del ESP32 y el gabinete de la pastilla eléctrica usan esa clasificación.</p></article>
+      </div>
+      <div class="extra">
+        <h3>Conexión de pines (según el código)</h3>
+        <div class="tabla"><table>
+          <thead><tr><th>Pin</th><th>Componente</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td>GPIO 16 / 17</td><td>MPU6050 (SDA / SCL)</td><td>Datos y reloj I2C, dirección 0x68</td></tr>
+            <tr><td>GPIO 13</td><td>Servo de gas</td><td>90° abierta, 0° cerrada</td></tr>
+            <tr><td>GPIO 27</td><td>Servo de electricidad</td><td>90° encendida, 0° cortada</td></tr>
+            <tr><td>GPIO 19 / 21</td><td>LED verde / LED rojo</td><td>Modo normal / alarma activa</td></tr>
+            <tr><td>GPIO 22</td><td>Buzzer</td><td>Sirena de dos tonos</td></tr>
+            <tr><td>GPIO 23</td><td>LED azul</td><td>Indicador de electricidad</td></tr>
+            <tr><td>GPIO 18</td><td>Botón verde</td><td>Simula un sismo y rearma el sistema</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Alimentación</h3>
+        <p>El ESP32 funciona a 3.3 V lógicos y se alimenta por USB, cerca de una fuente. Los servomotores consumen picos de corriente al moverse, por lo que conviene alimentarlos desde la línea de 5 V y no desde el pin de 3.3 V.</p>
+        <!-- AGREGA AQUÍ MÁS TEXTO: costos, fotos del armado, diagrama de conexiones... -->
+      </div>
+    </section>
+
+    <!-- DETALLE: Tipo de conectividad (punto 5) -->
+    <section class="page detalle" id="el-conectividad">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">📶</div><h2>Tipo de conectividad</h2></div>
+      <p class="lead">Punto 5. Funcionamiento de la conectividad del proyecto SafeHome.</p>
+      <div class="det-body">
+        <article class="full"><h3>Elementos de la conectividad</h3>
+          <ul class="lista">
+            <li><b>ESP32 DevKit V1:</b> es el dispositivo que incorpora la conexión Wi-Fi y procesa las lecturas del sensor.</li>
+            <li><b>Wi-Fi de 2.4 GHz:</b> permite conectar el ESP32 a una red inalámbrica y comunicarse con el servidor.</li>
+            <li><b>HTTP y backend:</b> HTTP permite enviar los eventos del ESP32 al servidor, donde el backend procesa la información.</li>
+            <li><b>Base de datos MySQL:</b> almacena los registros de los eventos detectados.</li>
+            <li><b>Interfaz web:</b> permite consultar los eventos y visualizar el estado del dispositivo desde una computadora o teléfono.</li>
+          </ul>
+        </article>
+        <article><h3>Tipo de conectividad</h3><p>El proyecto SafeHome IoT utiliza una conexión Wi-Fi de 2.4 GHz, la cual ya viene integrada en el microcontrolador ESP32. Esto significa que no necesitamos agregar un módulo externo para conectarnos a internet o a una red local.</p><p>Elegimos esta tecnología porque permite que el dispositivo transmita información de manera inalámbrica hacia un servidor, sin necesidad de utilizar cables adicionales de comunicación.</p></article>
+        <article><h3>Comunicación entre el ESP32 y el servidor</h3><p>Una vez que el ESP32 se encuentra conectado a la red Wi-Fi, puede comunicarse con nuestro servidor. Cuando el sensor MPU6050 detecta un movimiento que supera el umbral establecido, el ESP32 procesa esa información y genera un evento. Posteriormente, utiliza el protocolo HTTP para enviar ese evento al backend, que es la parte del sistema encargada de recibir y administrar la información.</p><p>Es importante entender que Wi-Fi y HTTP cumplen funciones diferentes: Wi-Fi proporciona la conexión inalámbrica, mientras que HTTP permite intercambiar información entre el dispositivo y el servidor.</p></article>
+        <article><h3>Almacenamiento de información</h3><p>Después de que el backend recibe la información enviada por el ESP32, se encarga de procesarla y almacenarla en una base de datos MySQL. Esto permite conservar un historial de los eventos detectados por el dispositivo.</p><p>Por ejemplo, si se detecta un posible movimiento sísmico, el sistema puede guardar un registro del evento para que posteriormente pueda ser consultado desde la plataforma web.</p></article>
+        <article><h3>Visualización desde la interfaz web</h3><p>Finalmente, el usuario puede acceder a una interfaz web desde una computadora o un teléfono conectado a la red. Esta interfaz consulta la información del backend y permite visualizar el estado del dispositivo, consultar los eventos registrados y verificar si los mecanismos de protección se encuentran activados.</p><p>De esta manera, no es necesario estar físicamente junto al prototipo para consultar la información que está generando.</p></article>
+        <article class="full"><h3>Conectividad alternativa mediante internet satelital</h3><p>Como alternativa ante la falta de conexión a internet convencional, el proyecto SafeHome IoT contempla la incorporación de un router con servicio de internet satelital. Este equipo permitirá recibir conexión a internet mediante una señal satelital y distribuirla dentro de la vivienda a través de una red Wi-Fi de 2.4 GHz, a la cual podrá conectarse el ESP32.</p><p>De esta manera, el dispositivo podrá mantener la comunicación con el servidor mediante solicitudes HTTP, permitiendo enviar los eventos detectados, almacenarlos en la base de datos MySQL y consultar la información desde la interfaz web. La incorporación de esta alternativa busca ampliar las posibilidades de conectividad del sistema, especialmente en viviendas o zonas donde el acceso a internet convencional sea limitado.</p><p>Es importante señalar que las funciones locales de detección y respuesta preventiva del ESP32 deberán mantenerse operativas incluso cuando no exista conexión a internet.</p></article>
+      </div>
+      <div class="extra">
+        <h3>Comparación con otras opciones</h3>
+        <div class="tabla"><table>
+          <thead><tr><th>Opción</th><th>Alcance</th><th>Internet</th><th>Hardware extra</th></tr></thead>
+          <tbody>
+            <tr><td>Wi-Fi</td><td>Toda la casa (según el router)</td><td>Sí</td><td>No</td></tr>
+            <tr><td>Bluetooth</td><td>Unos 10 m</td><td>No directo</td><td>No</td></tr>
+            <tr><td>GSM (SIM)</td><td>Cobertura celular</td><td>Sí</td><td>Módulo y plan de datos</td></tr>
+          </tbody>
+        </table></div>
+        <!-- AGREGA AQUÍ MÁS TEXTO: pruebas de señal, nombre de la red, alcance medido... -->
+      </div>
+    </section>
+
+    <!-- DETALLE: Protocolo de comunicación (punto 6) -->
+    <section class="page detalle" id="el-protocolo">
+      <button class="volver" data-page="elementos">Volver a Elementos</button>
+      <div class="det-head"><div class="ico">📨</div><h2>Protocolo de comunicación</h2></div>
+      <p class="lead">Punto 6. SafeHome IoT usa el protocolo HTTP con peticiones a rutas definidas.</p>
+      <div class="det-body">
+        <article class="full"><h3>Introducción</h3>
+          <p>Este apartado describe el protocolo de comunicación del prototipo SafeHome IoT, un sistema domótico de alcance pequeño que, mediante una placa ESP32, detecta movimiento sísmico y ejecuta el cierre de la válvula de gas y la desconexión de la carga eléctrica para reducir riesgos de incendio y explosión.</p>
+          <p>Para que el sistema funcione, sus cuatro partes (hardware, backend, base de datos y frontend) deben intercambiar información de forma ordenada. El protocolo define cómo se envían los datos, en qué formato y qué método se usa en cada caso. Sin él, el ESP32 registraría eventos que nadie podría consultar, y el dashboard mostraría información que no corresponde a lo que realmente ocurrió.</p>
+          <p>La solución elegida es el protocolo HTTP con peticiones a rutas definidas, por su sencillez, su compatibilidad con la ESP32 y su facilidad de prueba desde cualquier navegador o herramienta.</p>
+        </article>
+        <article><h3>Objetivo del protocolo</h3>
+          <ul class="lista">
+            <li>Permitir que el ESP32 envíe eventos al backend en el momento en que detecta movimiento.</li>
+            <li>Permitir que el frontend consulte el estado del sistema y el historial de eventos registrados.</li>
+            <li>Definir un formato común de intercambio (texto plano con pares campo=valor) que todos los componentes entiendan.</li>
+            <li>Mantener la comunicación simple y verificable, adecuada a un proyecto de alcance pequeño.</li>
+            <li>Dejar planteado el camino hacia una implementación real y segura (autenticación y HTTPS).</li>
+          </ul>
+        </article>
+        <article><h3>Protocolo utilizado: HTTP</h3>
+          <p>Este protocolo permite que el ESP32 intercambie información con el backend. ¿Por qué HTTP?</p>
+          <ul class="lista">
+            <li>La ESP32 cuenta con librerías estándar para hacer peticiones HTTP, por lo que no requiere configuración compleja.</li>
+            <li>Cada recurso del sistema (los eventos y el estado) tiene su propia ruta dentro del servidor, y los métodos HTTP indican qué se hace con él.</li>
+            <li>Cada petición es independiente: el servidor no necesita recordar al cliente entre una petición y otra, lo que simplifica el backend.</li>
+            <li>Las respuestas se pueden probar fácilmente con el navegador, Postman o curl, lo que facilita la depuración durante la demostración.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="extra">
+        <h3>Métodos HTTP utilizados</h3>
+        <p>Se utilizarán principalmente dos métodos:</p>
+        <div class="tabla"><table>
+          <thead><tr><th>Método</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td>POST</td><td>El ESP32 envía eventos al backend.</td></tr>
+            <tr><td>GET</td><td>El frontend consulta el estado y los eventos registrados.</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>POST</b> se usa porque el ESP32 crea un nuevo registro cada vez que detecta movimiento: el evento se agrega al historial y no modifica los anteriores.</p>
+        <p><b>GET</b> se usa porque el frontend solo lee información: no altera la base de datos, únicamente solicita el estado actual y la lista de eventos para mostrarlos en pantalla.</p>
+
+        <h3>Formato de intercambio</h3>
+        <p>Se utilizará texto plano con pares campo=valor (una línea por campo) como formato de intercambio de información, porque es lo más sencillo de generar desde la ESP32 y de leer desde Python.</p>
+        <p>Ejemplo del cuerpo que el ESP32 envía al backend mediante POST:</p>
+<pre class="code"><code>{
+  "dispositivo": "ESP32-01",
+  "evento": "movimiento_detectado",
+  "estado_gas": "cerrado",
+  "estado_electricidad": "desconectada"
+}</code></pre>
+        <p>Ejemplo de la respuesta que el backend devuelve al frontend mediante GET:</p>
+<pre class="code"><code>{
+  "estado_sistema": "alerta",
+  "gas": "cerrado",
+  "electricidad": "desconectada",
+  "alarma": "activada",
+  "sensor": "movimiento_detectado",
+  "fecha": "2026-11-14T15:39:00"
+}</code></pre>
+        <p>Los nombres de los campos coinciden con las columnas de la tabla <code>eventos_sismicos</code>, de modo que el backend puede guardar la información recibida casi directamente, sin transformaciones adicionales.</p>
+
+        <h3>Ejemplo de funcionamiento</h3>
+        <p>Recorrido completo de un evento, desde la detección hasta su presentación en el dashboard:</p>
+        <ol class="lista pasos">
+          <li><span class="num">1</span><span><b>ESP32:</b> detecta movimiento mediante el sensor y genera un evento.</span></li>
+          <li><span class="num">2</span><span><b>Petición HTTP POST:</b> el ESP32 envía el evento al backend en formato de texto plano con pares campo=valor a la ruta de eventos.</span></li>
+          <li><span class="num">3</span><span><b>Backend (FastAPI):</b> recibe y procesa la información, valida los datos y aplica la lógica del sistema.</span></li>
+          <li><span class="num">4</span><span><b>INSERT:</b> el backend guarda el evento en la base de datos MySQL, que almacena el historial.</span></li>
+          <li><span class="num">5</span><span><b>Petición HTTP GET:</b> el frontend solicita el estado actual y los eventos registrados a las rutas de consulta.</span></li>
+          <li><span class="num">6</span><span><b>Frontend (Vue.js):</b> presenta el estado del sistema y los registros al usuario.</span></li>
+        </ol>
+
+        <h3>Rutas propuestas</h3>
+        <div class="tabla"><table>
+          <thead><tr><th>Ruta</th><th>Método</th><th>Quién lo usa</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td><code>/eventos</code></td><td>POST</td><td>ESP32</td><td>Registrar un nuevo evento sísmico.</td></tr>
+            <tr><td><code>/eventos</code></td><td>GET</td><td>Frontend</td><td>Obtener el historial de eventos.</td></tr>
+            <tr><td><code>/estado</code></td><td>GET</td><td>Frontend</td><td>Obtener el estado actual del sistema: gas, electricidad, alarma y sensor.</td></tr>
+          </tbody>
+        </table></div>
+        <p>Con estas tres rutas se cubre todo el funcionamiento del prototipo: una de escritura para el hardware y dos de lectura para la interfaz.</p>
+
+        <h3>Seguridad de la comunicación</h3>
+        <p>Para una implementación real, la comunicación debe protegerse mediante autenticación y HTTPS.</p>
+        <ul class="lista">
+          <li><b>HTTPS:</b> cifra los datos en tránsito, de modo que la información del hogar no pueda ser leída ni alterada por terceros en la red.</li>
+          <li><b>Autenticación:</b> cada petición del ESP32 debe incluir una credencial (por ejemplo, una clave o token) que el backend valide antes de aceptar el evento, evitando registros falsos.</li>
+          <li><b>Validación de datos:</b> el backend debe comprobar que los campos recibidos tengan el tipo y los valores esperados antes de guardarlos.</li>
+        </ul>
+        <p>En la etapa de demostración estas medidas pueden quedar planteadas sin implementar, pero deben mencionarse como requisito para llevar el prototipo a un entorno real.</p>
+
+        <h3>Alcance y limitaciones</h3>
+        <ul class="lista">
+          <li>El protocolo se limita a HTTP y a tres rutas; no se implementan WebSockets ni mensajería en tiempo real.</li>
+          <li>La actualización del dashboard es periódica (consultas GET cada pocos segundos), no instantánea.</li>
+          <li>La comunicación opera en una red local o entorno de pruebas; no está expuesta a internet.</li>
+          <li>Los estados de gas y electricidad son simulados: el protocolo transporta información del prototipo, no controla instalaciones reales.</li>
+          <li>Trabajo futuro: autenticación por token, HTTPS, notificaciones push y soporte para varios dispositivos por hogar.</li>
+        </ul>
+
+        <h3>En resumen</h3>
+        <p>El protocolo de comunicación es la columna vertebral de SafeHome IoT: define cómo el ESP32 reporta un sismo, cómo el backend lo procesa y almacena, y cómo el frontend lo presenta al usuario. Al apoyarse en HTTP, en dos métodos claros (POST y GET) y en el texto plano con pares campo=valor como formato común, el sistema mantiene una comunicación simple, verificable y fácil de ampliar, sin perder de vista la seguridad que exigiría una implementación real.</p>
+        <!-- AGREGA AQUÍ MÁS TEXTO: capturas de Postman, pruebas con curl, diagrama del recorrido... -->
+      </div>
+    </section>
+
+    <!-- LENGUAJE Y CÓDIGO -->
+    <section class="page" id="lenguaje">
+      <h2>Lenguaje y código</h2>
+      <p class="lead">El cerebro de SafeHome está programado en C++ (Arduino). Esta página web usa HTML, CSS y JavaScript.</p>
+      <div class="lang">
+        <div class="lang-info">
+          <div class="libs">
+            <h3>Librerías</h3>
+            <ul>
+              <li><code>ESP32Servo</code><span>Controla los dos servomotores: la toma de gas y el interruptor de electricidad. Es la que aparece en <b>libraries.txt</b>.</span></li>
+              <li><code>Wire</code><span>Comunicación I2C con el sensor MPU6050. Ya viene incluida con el ESP32, no hay que instalarla.</span></li>
+            </ul>
+          </div>
+          <h3>Cómo funciona el código</h3>
+          <h2>Caracteristicas</h2>
+          <ul>
+            <li><b>Lenguaje compilado:</b> El código fuente se procesa mediante un compilador para transformarse en código de máquina ejecutable por el microcontrolador antes de su carga.</li>
+            <li><b>Control de pines GPIO:</b> Permite la gestión directa de los pines de entrada y salida de propósito general de la tarjeta.</li>
+            <li><b>Lectura de sensores:</b> Facilita la adquisición y procesamiento de datos provenientes de diversos sensores externos.</li>
+            <li><b>Control de actuadores:</b> Permite accionar elementos de salida físicos, tales como motores o sistemas de respuesta.</li>
+            <li><b>Conectividad integrada:</b>  Cuenta con bibliotecas especializadas para la gestión de comunicación mediante Wi-Fi y protocolos HTTP.</li>
+            <li><b>Compatibilidad nativa:</b> Diseñado para aprovechar al máximo la arquitectura y los recursos de hardware del ESP32.</li>
+          </ul>
+        <h2>Función Principal</h2>
+          <ul>
+            <li><b>WiFi.h:</b> Establece y gestiona la conexión del ESP32 a la red inalábrica (Wi-Fi).</li>
+            <li><b>Wire.h:</b> Habilita la comunicación mediante el protocolo I2C, utilizada específicamente para la integración del sensor MPU6050.</li>
+            <li><b>ESP32Servo:</b> Permite el control preciso de la posición y el movimiento de un servomotor.</li>
+            <li><b>HTTPClient.h:</b> Gestiona las peticiones y el envío de información recopilada hacia el backend o servidor remoto.</li>
+          </ul> 
+        </div>
+<div class="codes">
+          </code></pre>
+          </figure>
+          <figure class="codebox">
+            <figcaption><b>sketch.ino</b><span>Código del proyecto · ESP32 + MPU6050</span></figcaption>
+<pre class="code tall"><code>// =============================================================================
+//  SAFEHOME IoT - Sistema de protección sísmica con ESP32 + MPU6050
+// =============================================================================
+//  ¿QUÉ HACE?
+//   1. El sensor MPU6050 vigila continuamente si hay vibración (sismo).
+//   2. Al DETECTAR un sismo:
+//        - Suena la bocina (sirena de dos tonos).
+//        - Se enciende el LED rojo y se apaga el verde.
+//        - El servo de la TOMA DE GAS gira a 0°  -&gt; válvula CERRADA.
+//        - El servo del INTERRUPTOR GENERAL gira a 0° -&gt; electricidad CORTADA.
+//        - Se apaga el LED azul (indicador de electricidad / ventilador).
+//   3. Cuando el movimiento TERMINA (TIEMPO_CALMA sin vibración) el sistema
+//      vuelve solo a modo normal: gas y electricidad se reconectan.
+//   4. El botón verde sirve para SIMULAR un sismo y, si se presiona durante
+//      la alarma, para rearmar el sistema manualmente.
+//
+//  ELEMENTOS MÓVILES (se ven en el simulador):
+//   - Servo "servo"     = toma de gas (90° abierta / 0° cerrada)
+//   - Servo "servoLuz"  = interruptor general de electricidad (90° ON / 0° OFF)
+//   Ambos se mueven poco a poco (no de golpe) para que el movimiento se aprecie.
+//
+//  LIBRERÍAS: ESP32Servo (archivo libraries.txt)
+// =============================================================================
+
+#include &lt;Wire.h&gt;        // Comunicación I2C con el MPU6050
+#include &lt;ESP32Servo.h&gt;  // Control de los servomotores
+
+// ---------------------------- PINES ------------------------------------------
+#define BTN           18   // Botón verde: simula sismo / rearma el sistema
+#define LED_GREEN     19   // LED verde: sistema en modo normal
+#define LED_RED       21   // LED rojo: alarma sísmica activa
+#define BUZZER        22   // Bocina (sirena)
+#define FAN           23   // LED azul: electricidad / ventilador (ON en normal)
+#define SERVO_PIN     13   // Servo de la toma de gas
+#define SERVO_LUZ_PIN 27   // Servo del interruptor general de electricidad
+
+// El I2C normal del ESP32 usa los pines 21 y 22, pero en este proyecto ya los
+// ocupan el LED rojo y la bocina. Por eso el MPU6050 se conecta a otros pines.
+#define PIN_SDA       16   // MPU6050 - datos
+#define PIN_SCL       17   // MPU6050 - reloj
+
+// ---------------------------- MPU6050 ----------------------------------------
+const int MPU_ADDR = 0x68; // Dirección I2C del sensor (AD0 sin conectar)
+
+// ---------------------------- AJUSTES (puedes cambiarlos) --------------------
+// Detección de sismo
+const float UMBRAL_ACEL = 0.20;                  // Cambio de aceleración (en g) que cuenta como movimiento fuerte
+const float UMBRAL_GIRO = 20.0;                  // Velocidad de giro (en °/s) que cuenta como movimiento fuerte
+const int   MOVIMIENTOS_PARA_ALARMA = 3;         // Movimientos fuertes necesarios para confirmar sismo (1 = cualquier golpe)
+const unsigned long VENTANA_CONFIRMACION = 2000; // ms en los que deben ocurrir esos movimientos
+const unsigned long TIEMPO_CALMA = 5000;         // ms SIN movimiento para dar el sismo por terminado
+const unsigned long INTERVALO_LECTURA = 50;      // ms entre lecturas del sensor
+
+// Servos
+const int ANGULO_ABIERTO = 90;                   // Gas abierto / electricidad encendida
+const int ANGULO_CERRADO = 0;                    // Gas cerrado / electricidad cortada
+const unsigned long VELOCIDAD_SERVO_MS = 10;     // ms por grado (10 ms -&gt; 90° en ~0.9 s)
+
+// Sirena
+const int TONO_ALTO = 1400;                      // Hz
+const int TONO_BAJO = 900;                       // Hz
+const unsigned long CAMBIO_TONO_MS = 300;        // ms entre cambio de tono
+const int CANAL_BUZZER = 6;                      // Canal PWM propio para la bocina (evita chocar con los servos)
+
+// Sismo simulado (botón)
+const unsigned long DURACION_SISMO_SIM = 8000;   // ms que dura el sismo simulado
+
+// ---------------------------- VARIABLES DE ESTADO ----------------------------
+Servo gasServo;                 // Servo de la toma de gas
+Servo luzServo;                 // Servo del interruptor de electricidad
+
+bool alarmActive = false;       // true mientras dura la alarma sísmica
+int lastButton = HIGH;          // Estado anterior del botón (para detectar el clic)
+unsigned long ultimoBoton = 0;  // Anti-rebote del botón
+
+// Posición actual y destino de cada servo (para moverlos suavemente)
+int posGas = ANGULO_ABIERTO, objetivoGas = ANGULO_ABIERTO;
+int posLuz = ANGULO_ABIERTO, objetivoLuz = ANGULO_ABIERTO;
+
+// Detección de movimiento
+float axPrev = 0, ayPrev = 0, azPrev = 0; // Lectura anterior del acelerómetro
+bool primeraLectura = true;
+int movimientosRecientes = 0;             // Cuántos movimientos fuertes van en la ventana
+unsigned long inicioVentana = 0;          // Cuándo empezó la ventana de confirmación
+unsigned long ultimoMovimiento = 0;       // Cuándo fue el último movimiento fuerte
+unsigned long ultimaLectura = 0;
+
+// Sirena
+bool tonoAlto = false;
+unsigned long ultimoTono = 0;
+
+// Simulador de sismo
+bool simActiva = false;
+unsigned long simInicio = 0;
+
+// =============================================================================
+//  BOCINA (sirena)
+// =============================================================================
+
+// Prepara la bocina en un canal PWM independiente de los servos.
+// (El #if hace que funcione con las versiones 2.x y 3.x del core de ESP32)
+void iniciarBuzzer() {
+#if defined(ESP_ARDUINO_VERSION_MAJOR) &amp;&amp; ESP_ARDUINO_VERSION_MAJOR &gt;= 3
+  ledcAttachChannel(BUZZER, 2000, 8, CANAL_BUZZER);
+#else
+  ledcSetup(CANAL_BUZZER, 2000, 8);
+  ledcAttachPin(BUZZER, CANAL_BUZZER);
+#endif
+}
+
+// Hace sonar la bocina a la frecuencia indicada (0 = silencio)
+void sonar(int frecuencia) {
+#if defined(ESP_ARDUINO_VERSION_MAJOR) &amp;&amp; ESP_ARDUINO_VERSION_MAJOR &gt;= 3
+  ledcWriteTone(BUZZER, frecuencia);
+#else
+  ledcWriteTone(CANAL_BUZZER, frecuencia);
+#endif
+}
+
+// Alterna entre dos tonos mientras la alarma esté activa (efecto de sirena)
+void actualizarSirena(unsigned long ahora) {
+  if (!alarmActive) return;
+
+  if (ahora - ultimoTono &gt;= CAMBIO_TONO_MS) {
+    ultimoTono = ahora;
+    tonoAlto = !tonoAlto;
+    sonar(tonoAlto ? TONO_ALTO : TONO_BAJO);
+  }
+}
+
+// =============================================================================
+//  SERVOS (toma de gas e interruptor de electricidad)
+// =============================================================================
+
+// Mueve cada servo UN grado hacia su destino cada VELOCIDAD_SERVO_MS.
+// Así el giro es gradual y se aprecia en el simulador, y el programa no se
+// queda "congelado" mientras los servos se mueven.
+void actualizarServos(unsigned long ahora) {
+  static unsigned long ultimoPaso = 0;
+  if (ahora - ultimoPaso &lt; VELOCIDAD_SERVO_MS) return;
+  ultimoPaso = ahora;
+
+  if (posGas != objetivoGas) {
+    posGas += (objetivoGas &gt; posGas) ? 1 : -1;
+    gasServo.write(posGas);
+  }
+  if (posLuz != objetivoLuz) {
+    posLuz += (objetivoLuz &gt; posLuz) ? 1 : -1;
+    luzServo.write(posLuz);
+  }
+}
+
+// =============================================================================
+//  SENSOR MPU6050
+// =============================================================================
+
+// Lee dos bytes del sensor y los une en un número de 16 bits con signo
+int16_t leer16() {
+  int16_t alto = Wire.read();
+  int16_t bajo = Wire.read();
+  return (alto &lt;&lt; 8) | bajo;
+}
+
+// Lee aceleración (en g) y giroscopio (en °/s) del MPU6050
+void leerMPU(float &amp;ax, float &amp;ay, float &amp;az, float &amp;gx, float &amp;gy, float &amp;gz) {
+  Wire.beginTransmission(MPU_ADDR);
+  Wire.write(0x3B);                 // Primer registro del acelerómetro
+  Wire.endTransmission(false);
+  Wire.requestFrom(MPU_ADDR, 14, true);
+
+  int16_t rax = leer16();
+  int16_t ray = leer16();
+  int16_t raz = leer16();
+  leer16();                         // Temperatura (se ignora)
+  int16_t rgx = leer16();
+  int16_t rgy = leer16();
+  int16_t rgz = leer16();
+
+  ax = rax / 16384.0;               // Rango ±2 g
+  ay = ray / 16384.0;
+  az = raz / 16384.0;
+  gx = rgx / 131.0;                 // Rango ±250 °/s
+  gy = rgy / 131.0;
+  gz = rgz / 131.0;
+}
+
+// =============================================================================
+//  SIMULADOR DE SISMO (botón)
+// =============================================================================
+
+// Arranca un sismo artificial: durante unos segundos se le suma una vibración
+// a las lecturas del acelerómetro. Así el sismo pasa por el mismo camino que
+// uno real: sensor -&gt; detección -&gt; alarma -&gt; corte de servicios -&gt; reconexión.
+void iniciarSismoSimulado(unsigned long ahora) {
+  simActiva = true;
+  simInicio = ahora;
+  Serial.println("[SIMULATOR] Simulated earthquake started");
+}
+
+// Agrega la vibración artificial a la lectura del sensor mientras dure el sismo
+void inyectarSismoSimulado(float &amp;ax, float &amp;ay, float &amp;az, unsigned long ahora) {
+  if (!simActiva) return;
+
+  float t = (float)(ahora - simInicio);       // ms desde que empezó el sismo
+  if (t &gt; DURACION_SISMO_SIM) {
+    simActiva = false;
+    Serial.println("[SIMULATOR] Simulated earthquake finished");
+    return;
+  }
+
+  // Envolvente: la intensidad sube durante 1 s y baja durante los últimos 1.5 s
+  float subida = fminf(1.0, t / 1000.0);
+  float bajada = fminf(1.0, (DURACION_SISMO_SIM - t) / 1500.0);
+  float env = subida * bajada;
+  float s = t / 1000.0;
+
+  // Tres vibraciones (ejes X, Y, Z) con frecuencias distintas, como un temblor real
+  ax += 0.60 * env * sin(2 * PI * 3.0 * s);
+  ay += 0.40 * env * sin(2 * PI * 4.3 * s + 1.0);
+  az += 0.15 * env * sin(2 * PI * 5.0 * s);
+}
+
+// =============================================================================
+//  MODOS DE OPERACIÓN
+// =============================================================================
+
+// MODO NORMAL: todo en orden, gas abierto y electricidad encendida
+void normalMode() {
+  alarmActive = false;
+  movimientosRecientes = 0;
+
+  digitalWrite(LED_GREEN, HIGH);    // Verde = todo bien
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(FAN, HIGH);          // Azul = hay electricidad
+  sonar(0);                         // Bocina en silencio
+
+  objetivoGas = ANGULO_ABIERTO;     // Los servos se abren gradualmente
+  objetivoLuz = ANGULO_ABIERTO;
+
+  Serial.println("SYSTEM NORMAL");
+  Serial.println("GAS: OPEN (SIMULATED)");
+  Serial.println("ELECTRICITY: ON (SIMULATED)");
+}
+
+// MODO ALARMA: sismo detectado -&gt; sirena y corte de gas y electricidad
+void earthquakeDetected() {
+  alarmActive = true;
+  movimientosRecientes = 0;
+  ultimoTono = 0;                   // Fuerza que la sirena arranque de inmediato
+
+  digitalWrite(LED_GREEN, LOW);
+  digitalWrite(LED_RED, HIGH);      // Rojo = alarma
+  digitalWrite(FAN, LOW);           // Azul apagado = sin electricidad
+
+  objetivoGas = ANGULO_CERRADO;     // Los servos se cierran gradualmente
+  objetivoLuz = ANGULO_CERRADO;
+
+  Serial.println("EARTHQUAKE ALERT!");
+  Serial.println("GAS: CLOSED (SIMULATED)");
+  Serial.println("ELECTRICITY: OFF (SIMULATED)");
+}
+
+// =============================================================================
+//  BOTÓN
+// =============================================================================
+
+// Un clic simula un sismo. Si ya hay alarma, el clic rearma el sistema a mano.
+void revisarBoton(unsigned long ahora) {
+  int button = digitalRead(BTN);
+
+  // Detecta el instante en que se presiona (de HIGH a LOW) con anti-rebote
+  if (button == LOW &amp;&amp; lastButton == HIGH &amp;&amp; ahora - ultimoBoton &gt; 200) {
+    ultimoBoton = ahora;
+
+    if (!alarmActive &amp;&amp; !simActiva) {
+      iniciarSismoSimulado(ahora);  // Empieza el sismo artificial
+    } else {
+      simActiva = false;            // Cancela el sismo artificial
+      normalMode();                 // Rearme manual
+    }
+  }
+  lastButton = button;
+}
+
+// =============================================================================
+//  SETUP: se ejecuta una sola vez al encender
+// =============================================================================
+void setup() {
+  Serial.begin(115200);
+
+  // Entradas y salidas
+  pinMode(BTN, INPUT_PULLUP);       // Botón con resistencia interna (LOW = presionado)
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_RED, OUTPUT);
+  pinMode(FAN, OUTPUT);
+  iniciarBuzzer();
+
+  // Servos: periodo de 50 Hz y arrancan en posición "abierto / encendido"
+  gasServo.setPeriodHertz(50);
+  luzServo.setPeriodHertz(50);
+  gasServo.attach(SERVO_PIN);
+  luzServo.attach(SERVO_LUZ_PIN);
+  gasServo.write(posGas);
+  luzServo.write(posLuz);
+
+  // Comunicación con el MPU6050
+  Wire.begin(PIN_SDA, PIN_SCL);
+
+  // Despertar el MPU6050 (sale en modo "sleep" por defecto)
+  Wire.beginTransmission(MPU_ADDR);
+  Wire.write(0x6B);                 // Registro de energía
+  Wire.write(0x00);                 // 0 = sensor despierto
+  Wire.endTransmission(true);
+
+  normalMode();
+
+  Serial.println("SAFEHOME IoT READY");
+  Serial.println("Move the MPU6050 sliders quickly or press the button to simulate an earthquake");
+}
+
+// =============================================================================
+//  LOOP: se repite todo el tiempo
+// =============================================================================
+void loop() {
+  unsigned long ahora = millis();
+
+  revisarBoton(ahora);
+
+  // --- 1) Leer el sensor cada INTERVALO_LECTURA ---
+  if (ahora - ultimaLectura &gt;= INTERVALO_LECTURA) {
+    ultimaLectura = ahora;
+
+    float ax, ay, az, gx, gy, gz;
+    leerMPU(ax, ay, az, gx, gy, gz);
+    inyectarSismoSimulado(ax, ay, az, ahora);   // Solo hace algo si se pulsó el botón
+
+    if (!primeraLectura) {
+      // Cuánto cambió la aceleración respecto a la lectura anterior
+      float dAcel = sqrt(sq(ax - axPrev) + sq(ay - ayPrev) + sq(az - azPrev));
+      // Qué tan rápido está girando el sensor
+      float giro = sqrt(sq(gx) + sq(gy) + sq(gz));
+
+      // --- 2) ¿Hay un movimiento fuerte? ---
+      if (dAcel &gt; UMBRAL_ACEL || giro &gt; UMBRAL_GIRO) {
+        ultimoMovimiento = ahora;   // Mientras haya movimiento, el sismo "sigue"
+
+        if (!alarmActive) {
+          // Para evitar falsas alarmas por un golpe aislado, se piden varios
+          // movimientos fuertes dentro de una ventana de tiempo.
+          if (movimientosRecientes == 0 || ahora - inicioVentana &gt; VENTANA_CONFIRMACION) {
+            inicioVentana = ahora;
+            movimientosRecientes = 0;
+          }
+          movimientosRecientes++;
+
+          // --- 3) Sismo confirmado: activar alarma y cortar servicios ---
+          if (movimientosRecientes &gt;= MOVIMIENTOS_PARA_ALARMA) {
+            earthquakeDetected();
+          }
+        }
+      }
+    }
+
+    // Guardar la lectura actual para compararla con la siguiente
+    axPrev = ax; ayPrev = ay; azPrev = az;
+    primeraLectura = false;
+  }
+
+  // --- 4) Reconexión automática: pasó el tiempo de calma sin movimiento ---
+  if (alarmActive &amp;&amp; (ahora - ultimoMovimiento &gt; TIEMPO_CALMA)) {
+    Serial.println("MOVEMENT STOPPED - AUTO RESTORE");
+    normalMode();
+  }
+
+  // --- 5) Mover servos y sirena (se actualizan en cada vuelta del loop) ---
+  actualizarServos(ahora);
+  actualizarSirena(ahora);
+
+  delay(1);                         // Pequeña pausa: acelera la simulación en Wokwi
+}</code></pre>
+          </figure>
+          <figure class="codebox">
+            <figcaption><b>diagram.json</b><span>Diagrama del circuito (Wokwi)</span></figcaption>
+<pre class="code tall"><code>{
+  "version": 1,
+  "author": "SafeHome IoT",
+  "editor": "wokwi",
+  "parts": [
+    {"type":"board-esp32-devkit-c-v4","id":"esp","top":0,"left":0,"attrs":{}},
+    {"type":"wokwi-pushbutton","id":"btn","top":-100,"left":-200,"attrs":{"color":"green","label":"SISMO"}},
+    {"type":"wokwi-led","id":"green","top":-100,"left":-100,"attrs":{"color":"green"}},
+    {"type":"wokwi-led","id":"red","top":-50,"left":-100,"attrs":{"color":"red"}},
+    {"type":"wokwi-buzzer","id":"buzz","top":-100,"left":100,"attrs":{}},
+    {"type":"wokwi-led","id":"fan","top":50,"left":-100,"attrs":{"color":"blue"}},
+
+    {"type":"wokwi-servo","id":"servo","top":40,"left":230,"attrs":{"horn":"double"}},
+    {"type":"wokwi-servo","id":"servoLuz","top":160,"left":230,"attrs":{"horn":"single"}},
+
+    {"type":"wokwi-mpu6050","id":"imu","top":-160,"left":230,"attrs":{}}
+  ],
+  "connections": [
+    ["esp:18","btn:1.l","green",[]],
+    ["esp:GND.1","btn:2.l","black",[]],
+    ["esp:19","green:A","green",[]],
+    ["esp:GND.1","green:C","black",[]],
+    ["esp:21","red:A","red",[]],
+    ["esp:GND.1","red:C","black",[]],
+    ["esp:22","buzz:2","green",[]],
+    ["esp:GND.1","buzz:1","black",[]],
+    ["esp:23","fan:A","blue",[]],
+    ["esp:GND.1","fan:C","black",[]],
+
+    ["esp:13","servo:PWM","orange",[]],
+    ["esp:5V","servo:V+","red",[]],
+    ["esp:GND.1","servo:GND","black",[]],
+
+    ["esp:27","servoLuz:PWM","orange",[]],
+    ["esp:5V","servoLuz:V+","red",[]],
+    ["esp:GND.1","servoLuz:GND","black",[]],
+
+    ["esp:3V3","imu:VCC","red",[]],
+    ["esp:GND.1","imu:GND","black",[]],
+    ["esp:16","imu:SDA","green",[]],
+    ["esp:17","imu:SCL","blue",[]]
+  ],
+  "dependencies": {}
+}</code></pre>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SFH -->
+    <section class="page" id="sfh">
+      <h2>SafeHome IoT</h2>
+      <p class="lead">SFH son las siglas de SafeHome. Este es el panel del sistema, con todas sus partes juntas para verlas y probarlas.</p>
+      <div class="dash">
+        <div class="dash-top">
+          <div class="dash-title"><svg class="logo" width="34" height="34"><use href="#logo"/></svg>SafeHome IoT</div>
+          <b class="pill" data-bind="iot">Conectado</b>
+        </div>
+        <div class="dgrid">
+
+          <!-- 1. Panel de control -->
+          <article class="panel p-control">
+            <h3>Panel de control</h3><p>Vigila el sensor y muestra el estado de todo el sistema.</p>
+            <div class="demo">
+              <div class="demo-head">
+                <svg class="logo" width="46" height="46"><use href="#logo"/></svg>
+                <div><strong>Panel de SafeHome</strong><p data-bind="estado" aria-live="polite">Sensor en vigilancia. Sin movimiento fuerte.</p></div>
+              </div>
+              <svg class="seismo" viewBox="0 0 400 110" role="img" aria-label="Señal en vivo del sensor">
+                <line x1="0" x2="400" y1="55" y2="55" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 6"/>
+                <polyline class="onda" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" points=""/>
+              </svg>
+              <div class="serv"><span>Electricidad</span><b data-bind="luz">Conectada</b></div>
+              <div class="serv"><span>Gas</span><b data-bind="gas">Abierto</b></div>
+              <div class="serv"><span>Indicador LED</span><b data-bind="led">Apagado</b></div>
+              <div class="serv"><span>Buzzer</span><b data-bind="buzzer">Silencio</b></div>
+            </div>
+            <div class="actions"><button class="btn primary" data-act="sim" data-bind="simbtn">Simular sismo</button></div>
+          </article>
+
+          <!-- 2. Componentes del prototipo -->
+          <article class="panel p-comp">
+            <h3>Componentes del prototipo</h3><p>Toca un componente para ver su información.</p>
+            <div class="rows">
+              <a class="row" href="#el-sensor" data-page="el-sensor"><span>📡 Sensor de movimiento</span><em>Ver detalles</em></a>
+              <a class="row" href="#el-micro" data-page="el-micro"><span>🧠 Microcontrolador</span><em>Ver detalles</em></a>
+              <a class="row" href="#el-rele" data-page="el-rele"><span>🔌 Relé de electricidad</span><em>Ver detalles</em></a>
+              <a class="row" href="#el-gas" data-page="el-gas"><span>🔥 Electroválvula de gas</span><em>Ver detalles</em></a>
+              <a class="row" href="#el-alarma" data-page="el-alarma"><span>🔔 Alarma y LED</span><em>Ver detalles</em></a>
+              <a class="row" href="#el-bateria" data-page="el-bateria"><span>🔊 Buzzer</span><em>Ver detalles</em></a>
+            </div>
+          </article>
+
+          <!-- 3. Válvula de gas -->
+          <article class="panel p-gas">
+            <h3>Válvula de gas</h3><p>Se cierra sola con un sismo. También puedes manejarla a mano.</p>
+            <div class="ctl"><span class="ico-big">🔥</span><div><small>Estado</small><b class="big" data-bind="gas">...</b></div><button class="btn ghost" data-act="gas" data-bind="gasbtn">...</button></div>
+          </article>
+
+          <!-- 4. Electricidad -->
+          <article class="panel p-luz">
+            <h3>Electricidad</h3><p>Se corta sola con un sismo. También puedes manejarla a mano.</p>
+            <div class="ctl"><span class="ico-big">🔌</span><div><small>Estado</small><b class="big" data-bind="luz">...</b></div><button class="btn ghost" data-act="luz" data-bind="luzbtn">...</button></div>
+          </article>
+
+          <!-- 5. Indicador LED -->
+          <article class="panel p-led">
+            <h3>Indicador LED</h3><p>Se enciende cuando detecta un sismo.</p>
+            <div class="ctl"><i class="lamp"></i><div><small>Estado</small><b class="big" data-bind="led">...</b></div><button class="btn ghost" data-act="led" data-bind="ledbtn">...</button></div>
+          </article>
+
+          <!-- 6. Buzzer -->
+          <article class="panel p-buz">
+            <h3>Buzzer</h3><p>Suena para avisar a las personas que hay un sismo.</p>
+            <div class="ctl"><span class="bell">🔔</span><div><small>Estado</small><b class="big" data-bind="buzzer">...</b></div><button class="btn ghost" data-act="buzzer" data-bind="buzzerbtn">...</button></div>
+          </article>
+
+          <!-- 7. Prueba de funcionamiento -->
+          <article class="panel p-test">
+            <h3>Prueba de funcionamiento</h3><p>Revisa que cada parte responda (simulación).</p>
+            <ol class="test">
+              <li>Sensor de movimiento responde</li>
+              <li>Microcontrolador procesa la señal</li>
+              <li>Relé corta la electricidad</li>
+              <li>Válvula cierra el gas</li>
+              <li>LED y buzzer se activan</li>
+              <li>Alerta enviada por IoT</li>
+            </ol>
+            <button class="btn primary" data-act="test">Iniciar prueba</button>
+            <p class="result"></p>
+          </article>
+
+          <!-- 8. Comunicación IoT -->
+          <article class="panel p-iot">
+            <h3>Comunicación IoT</h3><p>Envía una alerta por Wi-Fi cuando detecta un sismo.</p>
+            <div class="kvs">
+              <div class="kv"><span>Conexión</span><b data-bind="iot">Conectado</b></div>
+              <div class="kv"><span>Red</span><b>Wi-Fi (ESP32)</b></div>
+              <div class="kv"><span>Protocolo</span><b>HTTP</b></div>
+              <div class="kv"><span>Dispositivo</span><b>SFH-01</b></div>
+            </div>
+            <pre class="msgs">Esperando mensajes…</pre>
+            <button class="btn ghost" data-act="iot" data-bind="iotbtn">Desconectar</button>
+          </article>
+
+          <!-- 9. Historial de eventos -->
+          <article class="panel p-hist">
+            <h3>Historial de eventos</h3><p>Todo lo que hace el sistema queda registrado aquí.</p>
+            <ul class="historial"></ul>
+            <button class="btn ghost" data-act="limpiar">Borrar historial</button>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="about">
+        <article><h3>El problema</h3><p>Después de un sismo fuerte, las fugas de gas y los cortos circuitos pueden provocar incendios, incluso cuando la estructura resiste.</p></article>
+        <article><h3>Nuestra solución</h3><p>Un sensor detecta la sacudida y el sistema corta automáticamente la electricidad y el gas, sin que nadie tenga que reaccionar.</p></article>
+        <article><h3>Objetivo</h3><p>Reducir los riesgos en el hogar tras un sismo con una solución accesible, automática y fácil de instalar.</p></article>
+      </div>
+      <div class="team">
+        <p><h1>INTEGRANTES DEL EQUIPO</h1></p>
+        <p>Alvarado Avalos Melanie Ximena</p>
+        <p>Barcena Gonzales Paola</p>
+        <p>Barcenas Martinez Doni</p>
+        <p>Flores Villagrán Selene</p>
+        <p>Rendón Montero Frida Sofia</p>
+        <p>Sanchez Carranza Daniela</p>
+        <p>Torres Jacobo Luna Celic</p>
+        <p>Vargas Guzman Josue Francisco</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>SafeHome © 2026 · Proyecto escolar</footer>
+  <script src="script.js"></script>
+</body>
+</html>
